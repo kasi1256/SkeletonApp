@@ -1,4 +1,8 @@
-﻿@page "/todo"
+﻿@using FirstApp.Models;
+@page "/todo"
+
+@using FirstApp.Clients;
+@inject NasaClient NasaClient;
 
 <PageTitle>Todo List Page</PageTitle>
 <h1>ToDo List</h1>
@@ -20,6 +24,8 @@
     }
 </ul>
 
+<p>@nasaResponse</p>
+
 @code {
 
     private List<TodoItem> todoList = new();
@@ -30,4 +36,14 @@
             newTodo = string.Empty;
         }
     }
+
+    private NasaResponse? nasaResponse = null;
+
+    protected override async Task OnInitializedAsync(){
+
+        nasaResponse = await NasaClient.getNasa();
+
+    }
+
+
 }
