@@ -1,8 +1,7 @@
 ﻿@using FirstApp.Models;
 @page "/todo"
 
-@using FirstApp.Clients;
-@inject NasaClient NasaClient;
+
 
 <PageTitle>Todo List Page</PageTitle>
 <h1>ToDo List</h1>
@@ -24,7 +23,7 @@
     }
 </ul>
 
-<p>@nasaResponse</p>
+
 
 @code {
 
@@ -37,13 +36,7 @@
         }
     }
 
-    private NasaResponse? nasaResponse = null;
-
-    protected override async Task OnInitializedAsync(){
-
-        nasaResponse = await NasaClient.getNasa();
-
-    }
+   
 
 
 }
