@@ -15,7 +15,7 @@
 <br />
 <NasaImageSection copyright="@nasaResponse.copyright" imgUrl="@nasaResponse.url" hdUrl="@nasaResponse.hdurl"/>
 
-<input placeholder="enter our tasks" @bind="date"/>
+<input placeholder="YYYY-MM-DD" @bind="date"/>
 <button @onclick="AddDateFilter">Submit</button>
 
 @code {
@@ -25,8 +25,10 @@
    
     public string? date;
     
-    private void AddDateFilter(){
+    async Task AddDateFilter(){
         
+         nasaResponse = await NasaClient.getNasa(date);
+         date = string.Empty;
     }
     
     protected override async Task OnInitializedAsync(){
