@@ -7,7 +7,7 @@ public class CustomAuthenticationStateProvider: AuthenticationStateProvider {
         return await Task.FromResult(new AuthenticationState(AnonymousUser));
     }
 
-    private ClaimsPrincipal AnonymousUser => new(new ClaimsIdentity(Array.Empty<Claim>()));
+    private ClaimsPrincipal AnonymousUser => new(new ClaimsIdentity(Array.Empty<Claim>(),"empty"));
 
     private ClaimsPrincipal RegularFakedUser {
         get{
@@ -15,7 +15,7 @@ public class CustomAuthenticationStateProvider: AuthenticationStateProvider {
                 new Claim(ClaimTypes.Name,"John"),
                 new Claim(ClaimTypes.Role,"user"),
 
-            }
+            };
             var identity = new ClaimsIdentity(claims,"faked");
             return new ClaimsPrincipal(identity);
         }
@@ -27,7 +27,7 @@ public class CustomAuthenticationStateProvider: AuthenticationStateProvider {
                 new Claim(ClaimTypes.Name,"Sally"),
                 new Claim(ClaimTypes.Role,"admin"),
 
-            }
+            };
             var identity = new ClaimsIdentity(claims,"faked");
             return new ClaimsPrincipal(identity);
         }
